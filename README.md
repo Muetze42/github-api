@@ -31,6 +31,11 @@ $response = $client->repos()->reposCreateAFork(
     requestBody: ['organization' => 'MyVendor', 'name' => 'MyRepo']
 );
 
+// Get data as array
+return $response->json()
+// Get data as object
+return $response->object()
+// More infos: https://laravel.com/docs/http-client#making-requests
 ```
 
 Every method returns a `\Illuminate\Http\Client\Response`.
@@ -46,3 +51,94 @@ if ($response->successful()) {
 ## Endpoints
 
 See [ENDPOINTS.md](ENDPOINTS.md)
+
+## Aliases methods for the current authenticated user
+
+For frequently used endpoints for the current authenticated user, there are also additional methods that can be called
+directly from the client.
+
+### Get the authenticated user
+
+Alias for `$client->users()->getTheAuthenticatedUser()`.
+
+Use the REST API to get public and private information about authenticated users.
+
+Reference: https://docs.github.com/en/rest/users/users#get-the-authenticated-user
+
+```php
+<?php
+
+$client->whoami();
+```
+
+### List repositories for the authenticated user
+
+Reference: https://docs.github.com/en/rest/repos/repos#list-repositories-for-the-authenticated-user
+
+Alias for `$client->repos()->listRepositoriesForTheAuthenticatedUser()`.
+
+```php
+<?php
+
+$client->userRepositories();
+```
+
+### List gists for the authenticated user
+
+Reference: https://docs.github.com/rest/gists/gists#list-gists-for-the-authenticated-user
+
+Alias for `$client->gists()->listGistsForTheAuthenticatedUser()`.
+
+```php
+<?php
+
+$client->userGists();
+```
+
+### List issues assigned to the authenticated user
+
+Reference: https://docs.github.com/rest/issues/issues#list-issues-assigned-to-the-authenticated-user
+
+Alias for `$client->issues()->listIssuesAssignedToTheAuthenticatedUser()`.
+
+```php
+<?php
+
+$client->userIssues();
+```
+
+### List notifications for the authenticated user
+
+Reference: https://docs.github.com/rest/activity/notifications#list-notifications-for-the-authenticated-user
+
+Alias for `$client->activity()->listNotificationsForTheAuthenticatedUser()`.
+
+```php
+<?php
+
+$client->userNotifications();
+```
+
+### List organization issues assigned to the authenticated user
+
+Reference: https://docs.github.com/rest/issues/issues#list-organization-issues-assigned-to-the-authenticated-user
+
+Alias for `$client->issues()->listOrganizationIssuesAssignedToTheAuthenticatedUser()`.
+
+```php
+<?php
+
+$client->userOrganizationIssues();
+```
+
+### List repository notifications for the authenticated user
+
+Reference: https://docs.github.com/rest/activity/notifications#list-repository-notifications-for-the-authenticated-user
+
+Alias for `$client->activity()->listRepositoryNotificationsForTheAuthenticatedUser()`.
+
+```php
+<?php
+
+$client->userRepositoryNotifications();
+```

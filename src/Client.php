@@ -2,6 +2,7 @@
 
 namespace NormanHuth\GithubApi;
 
+use Illuminate\Http\Client\Response;
 use NormanHuth\GithubApi\Http\Rest\ActionsClient;
 use NormanHuth\GithubApi\Http\Rest\ActivityClient;
 use NormanHuth\GithubApi\Http\Rest\AppsClient;
@@ -226,5 +227,171 @@ class Client
     public function users(): UsersClient
     {
         return new UsersClient($this->token);
+    }
+
+    /**
+     * Get the authenticated user.
+     *
+     * @link https://docs.github.com/rest/users/users#get-the-authenticated-user
+     */
+    public function whoami(): Response
+    {
+        return $this->users()->getTheAuthenticatedUser();
+    }
+
+    /**
+     * List repositories for the authenticated user.
+     *
+     * @link https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user
+     */
+    public function userRepositories(
+        string $visibility = null,
+        string $affiliation = null,
+        string $type = null,
+        string $sort = null,
+        string $direction = null,
+        int $per_page = 100,
+        int $page = null,
+        string $since = null,
+        string $before = null
+    ): Response {
+        return $this->repos()->listRepositoriesForTheAuthenticatedUser(
+            $visibility,
+            $affiliation,
+            $type,
+            $sort,
+            $direction,
+            $per_page,
+            $page,
+            $since,
+            $before
+        );
+    }
+
+    /**
+     * List gists for the authenticated user.
+     *
+     * @link https://docs.github.com/rest/gists/gists#list-gists-for-the-authenticated-user
+     */
+    public function userGists(
+        string $since = null,
+        int $per_page = 100,
+        int $page = null
+    ): Response {
+        return $this->gists()->listGistsForTheAuthenticatedUser($since, $per_page, $page);
+    }
+
+    /**
+     * List issues assigned to the authenticated user.
+     *
+     * @link https://docs.github.com/rest/issues/issues#list-issues-assigned-to-the-authenticated-user
+     */
+    public function userIssues(
+        string $filter = null,
+        string $state = null,
+        string $labels = null,
+        string $sort = null,
+        string $direction = null,
+        string $since = null,
+        bool $collab = null,
+        bool $orgs = null,
+        bool $owned = null,
+        bool $pulls = null,
+        int $per_page = 100,
+        int $page = null
+    ): Response {
+        return $this->issues()->listIssuesAssignedToTheAuthenticatedUser(
+            $filter,
+            $state,
+            $labels,
+            $sort,
+            $direction,
+            $since,
+            $collab,
+            $orgs,
+            $owned,
+            $pulls,
+            $per_page,
+            $page
+        );
+    }
+
+    /**
+     * List notifications for the authenticated user.
+     *
+     * @link https://docs.github.com/rest/activity/notifications#list-notifications-for-the-authenticated-user
+     */
+    public function userNotifications(
+        bool $all = null,
+        bool $participating = null,
+        string $since = null,
+        string $before = null,
+        int $page = null,
+        int $per_page = 100
+    ): Response {
+        return $this->activity()->listNotificationsForTheAuthenticatedUser(
+            $all,
+            $participating,
+            $since,
+            $before,
+            $page,
+            $per_page
+        );
+    }
+
+    /**
+     * List organization issues assigned to the authenticated user.
+     *
+     * @link https://docs.github.com/rest/issues/issues#list-organization-issues-assigned-to-the-authenticated-user
+     */
+    public function userOrganizationIssues(
+        string $org,
+        string $filter = null,
+        string $state = null,
+        string $labels = null,
+        string $sort = null,
+        string $direction = null,
+        string $since = null,
+        int $per_page = 100,
+        int $page = null
+    ): Response {
+        return $this->issues()->listOrganizationIssuesAssignedToTheAuthenticatedUser(
+            $org,
+            $filter,
+            $state,
+            $labels,
+            $sort,
+            $direction,
+            $since,
+            $per_page,
+            $page
+        );
+    }
+
+    /**
+     * List repository notifications for the authenticated user.
+     *
+     * @link https://docs.github.com/rest/activity/notifications#list-repository-notifications-for-the-authenticated-user
+     */
+    public function userRepositoryNotifications(
+        string $owner,
+        string $repo,
+        bool $all = null,
+        bool $participating = null,
+        string $since = null,
+        string $before = null,
+        int $per_page = 100,
+        int $page = null
+    ): Response {
+        return $this->activity()->listRepositoryNotificationsForTheAuthenticatedUser(
+            $owner,
+            $repo,
+            $all,
+            $participating,
+            $since,
+            $before,
+            $per_page,
+            $page
+        );
     }
 }
