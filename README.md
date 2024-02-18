@@ -42,3 +42,7 @@ if ($response->successful()) {
     return $response->json();
 }
 ```
+
+## Endpoints
+
+See [ENDPOINTS.md](ENDPOINTS.md)
