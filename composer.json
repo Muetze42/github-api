@@ -1,0 +1,33 @@
+{
+    "name": "norman-huth/github-api",
+    "description": "A PHP GitHub API wrapper wich used the Laravel HTTP Client (based on Guzzle HTTP client).",
+    "license": "MIT",
+    "keywords": [
+        "api-wrapper",
+        "github-api",
+        "guzzle-http",
+        "http-client",
+        "illuminate-http",
+        "php-8-2"
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/http": "^9.0|^10.0|^11.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NormanHuth\\GithubApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Norman Huth",
+            "homepage": "https://huth.it"
+        }
+    ],
+    "require-dev": {
+        "laravel/pint": "^1.13",
+        "pedrotroller/php-cs-custom-fixer": "^2.33"
+    }
+}
