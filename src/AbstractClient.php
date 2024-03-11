@@ -74,6 +74,7 @@ abstract class AbstractClient
      */
     protected function get(string $route, array $data = [], array $replace = []): Response
     {
+        $data = array_merge($replace, $data);
         $route = $this->makeReplacements($route, $replace);
         $route = str_replace('{path}', 'app/Models', $route);
         $data = $this->dataCleanUp($data);
@@ -86,6 +87,7 @@ abstract class AbstractClient
      */
     protected function post(string $route, array $data = [], array $replace = [], string $method = 'post'): Response
     {
+        $data = array_merge($replace, $data);
         $route = $this->makeReplacements($route, $replace);
         $data = $this->dataCleanUp($data);
 
@@ -97,6 +99,7 @@ abstract class AbstractClient
      */
     protected function patch(string $route, array $data = [], array $replace = []): Response
     {
+        $data = array_merge($replace, $data);
         return $this->post($route, $data, $replace, __FUNCTION__);
     }
 
@@ -105,6 +108,7 @@ abstract class AbstractClient
      */
     protected function put(string $route, array $data = [], array $replace = []): Response
     {
+        $data = array_merge($replace, $data);
         return $this->post($route, $data, $replace, __FUNCTION__);
     }
 
@@ -113,6 +117,7 @@ abstract class AbstractClient
      */
     protected function delete(string $route, $data = [], array $replace = []): Response
     {
+        $data = array_merge($replace, $data);
         return $this->post($route, $data, $replace, __FUNCTION__);
     }
 }
